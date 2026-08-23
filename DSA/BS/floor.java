@@ -1,0 +1,39 @@
+public class floor {
+    public static void main(String[] args) {
+        int[] arr = {2, 4, 6, 8, 11, 12, 14, 16};
+        int target = 10;
+
+        int result = ceiling(arr, target);   // ✅ fixed
+
+        if (result < arr.length) {
+            System.out.println("Ceiling index: " + result);
+            System.out.println("Ceiling value: " + arr[result]);
+        } else {
+            System.out.println("No ceiling found");
+        }
+    }
+
+    static int ceiling(int[] arr, int target) {
+        int start = 0;
+        int end = arr.length - 1;
+
+        // if target is greater than largest element
+        if (target > arr[end]) {
+            return -1;
+        }
+
+        while (start <= end) {
+            int mid = start + (end - start) / 2;
+
+            if (target < arr[mid]) {
+                end = mid - 1;
+            } else if (target > arr[mid]) {
+                start = mid + 1;
+            } else {
+                return mid; // exact match
+            }
+        }
+
+        return end; // ceiling index
+    }
+}
